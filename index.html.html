@@ -1,0 +1,582 @@
+<!doctype html>
+<html lang="pt-BR"><head><script>window["__codeletBootstrap__"]=JSON.parse('{"A":"A","B":"20260915-03-e4a8234","C":{"Abril Fatface":"YACgEZbkUVE,0","Alfa Slab One":"YACgEYS9sJU,0","Anton":"YACgEcYqQ-A,0","Archivo":"YAHO2-t-jNE,0","Arial":"YAGyDvJ_4Ts,0","Bebas Neue":"YACgESME5ew,0","Bricolage Grotesque":"YAFyMcdwzpc,0","Canva Sans":"YAFLd8sKbwc,2","Caveat":"YALBs2ploWQ,0","Comic Sans MS":"YAHO2VMiyZo,0","Cormorant Garamond":"YAFdJhX-538,0","Courier New":"YAGzXiGs0_8,0","DM Sans":"YAD1aU3sLnI,0","DM Serif Display":"YAD1aYG82rc,0","Forum":"YACgEcnnqB4,0","Fraunces":"YAEul-FRQw4,0","Georgia":"YAGzXkO0pEM,0","Helvetica Neue":"YAFcf6CtJfI,0","Impact":"YAFcfnjI7Vk,0","Inter":"YAFdJvSyp_k,3","Iowan Old Style":"YAGNIFa8j9o,0","Jacques Francois":"YAHO2a5g66Q,0","JetBrains Mono":"YAFdJksXcAk,0","Libre Baskerville":"YACgEUFdPdA,0","Manrope":"YAHO2b2feC4,0","Merriweather":"YACgEXvHxxs,0","Montserrat":"YADLjI9qxTA,0","Nunito":"YACgEX8C5Gg,0","Oleo Script":"YACgEQQ14jI,0","Phantom Sans":"YAHO2E8Pb88,0","Playfair Display":"YACgEYmuCJE,0","Poppins":"YAFdJjbTu24,1","Press Start 2P":"YAFyGr-8pmQ,0","Quicksand":"YADWjpfPmdk,0","Raleway":"YACgEVg3xZg,0","Segoe UI":"YAHNdRD1Klw,0","Source Sans 3":"YAG4lO1Mj10,0","Spectral":"YAHO2rVUHIM,0","Times New Roman":"YAGzXW3gftg,0","Times":"YAGzXW3gftg,0","Ubuntu":"YACgERDU--Q,0","Work Sans":"YAGXhLOKv44,0","Yellowtail":"YACgEYG4kG4,0","ui-monospace":"YADlN8CFZ8Q,0","ui-sans-serif":"YACkoN-xg4g,0"}}');</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atenção &amp; Design</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.577.0/dist/umd/lucide.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;700;900&amp;family=Playfair+Display:wght@700;900&amp;display=swap" rel="stylesheet">
+  <style>
+:root {
+  --purple: #7B2D8E;
+  --magenta: #E91E8C;
+  --cyan: #00D4AA;
+  --yellow: #FFD600;
+  --red: #FF3B30;
+  --orange: #FF8C00;
+}
+body { font-family: 'Fira Sans', sans-serif; margin: 0; overflow-x: hidden; }
+.font-display { font-family: 'Playfair Display', serif; }
+
+/* Collage textures */
+.torn-edge { clip-path: polygon(0% 2%, 5% 0%, 12% 3%, 20% 0%, 28% 2%, 35% 0%, 42% 3%, 50% 1%, 58% 3%, 65% 0%, 72% 2%, 80% 0%, 88% 3%, 95% 0%, 100% 2%, 100% 98%, 95% 100%, 88% 97%, 80% 100%, 72% 98%, 65% 100%, 58% 97%, 50% 99%, 42% 97%, 35% 100%, 28% 98%, 20% 100%, 12% 97%, 5% 100%, 0% 98%); }
+.paper-shadow { box-shadow: 3px 4px 8px rgba(0,0,0,0.25), -1px -1px 3px rgba(0,0,0,0.05); }
+.halftone { background-image: radial-gradient(circle, rgba(0,0,0,0.08) 1px, transparent 1px); background-size: 6px 6px; }
+.noise-bg { position: relative; }
+.noise-bg::before { content:''; position:absolute; inset:0; opacity:0.04; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); pointer-events:none; z-index:0; }
+
+.collage-item { transition: transform 0.15s ease; }
+.collage-item:hover { transform: scale(1.04) rotate(-1deg); }
+
+/* Nav cards */
+.nav-card { cursor:pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.nav-card:hover { transform: translateY(-4px) rotate(-1deg); box-shadow: 5px 6px 16px rgba(0,0,0,0.3); }
+
+/* Screen transitions */
+.screen { display:none; animation: fadeUp 0.3s ease; }
+.screen.active { display:block; }
+@keyframes fadeUp { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+
+/* Trial grid - completely neutral */
+.trial-grid { display:grid; gap:12px; justify-content:center; align-content:center; }
+.trial-cell { border-radius:6px; cursor:pointer; transition: none; }
+
+/* Doodle lines */
+.doodle-line { position:absolute; border:none; height:3px; background: var(--magenta); transform: rotate(-3deg); border-radius:2px; }
+
+.info-card { background: #fff; border-left: 5px solid var(--cyan); border-radius: 0 12px 12px 0; }
+</style>
+ </head>
+ <body data-template-id="__page-root" class="w-full" style="min-height: calc(100 * min(var(--vh,1vh),1vh)); background: rgb(26, 10, 46);">
+  <!-- ==================== HOME ==================== -->
+  <div id="screen-home" class="screen active w-full">
+   <div class="noise-bg w-full" style="min-height:calc(100 * min(var(--vh,1vh),1vh)); background: linear-gradient(135deg, #1a0a2e 0%, #2d1450 40%, #1a0a2e 100%);">
+    <div class="relative max-w-4xl mx-auto px-4 py-8" style="z-index:1;">
+     <!-- Decorative collage elements -->
+     <div class="absolute top-4 right-4 w-20 h-20 rounded-full opacity-20" style="background: var(--magenta); filter:blur(20px);"></div>
+     <div class="absolute top-20 left-2 w-3 h-16 rounded" style="background: var(--cyan); transform:rotate(12deg); opacity:0.6;"></div>
+     <div class="absolute top-12 right-16 w-12 h-12 border-2 rounded-sm" style="border-color: var(--yellow); transform:rotate(22deg); opacity:0.5;"></div><!-- Halftone circle deco -->
+     <div class="halftone absolute rounded-full" style="width:80px;height:80px;top:60px;right:30px;opacity:0.3;"></div><!-- Brain SVG deco -->
+     <svg class="absolute opacity-30" style="top:30px;left:60%;width:60px;" viewBox="0 0 64 64" fill="none">
+      <path d="M32 8C20 8 14 18 14 26c0 6 3 10 6 13 2 2 3 5 3 9h18c0-4 1-7 3-9 3-3 6-7 6-13 0-8-6-18-18-18z" stroke="#FFD600" stroke-width="2.5" fill="none"></path> <path d="M24 48h16M26 52h12" stroke="#FFD600" stroke-width="2" stroke-linecap="round"></path> <path d="M32 8V26M22 20c4 2 8 2 12-2" stroke="#FFD600" stroke-width="1.5" opacity="0.5"></path>
+     </svg><!-- Eye SVG deco -->
+     <svg class="absolute opacity-30" style="top:100px;left:8%;width:50px;" viewBox="0 0 64 40" fill="none">
+      <ellipse cx="32" cy="20" rx="28" ry="18" stroke="#00D4AA" stroke-width="2.5"></ellipse> <circle cx="32" cy="20" r="8" stroke="#00D4AA" stroke-width="2"></circle> <circle cx="32" cy="20" r="3" fill="#00D4AA" opacity="0.5"></circle>
+     </svg><!-- Target/dartboard deco -->
+     <svg class="absolute opacity-25" style="bottom:40%;right:5%;width:45px;" viewBox="0 0 48 48" fill="none">
+      <circle cx="24" cy="24" r="20" stroke="#FF3B30" stroke-width="2"></circle> <circle cx="24" cy="24" r="13" stroke="#FF3B30" stroke-width="2"></circle> <circle cx="24" cy="24" r="6" stroke="#FF3B30" stroke-width="2"></circle> <circle cx="24" cy="24" r="2" fill="#FF3B30"></circle>
+     </svg><!-- Gamepad deco -->
+     <svg class="absolute opacity-20" style="bottom:30%;left:3%;width:50px;transform:rotate(-8deg);" viewBox="0 0 64 40" fill="none">
+      <rect x="8" y="6" width="48" height="28" rx="14" stroke="#E91E8C" stroke-width="2.5"></rect> <circle cx="22" cy="20" r="4" stroke="#E91E8C" stroke-width="1.5"></circle> <circle cx="42" cy="16" r="2.5" fill="#E91E8C" opacity="0.5"></circle> <circle cx="46" cy="20" r="2.5" fill="#E91E8C" opacity="0.5"></circle>
+     </svg><!-- Arrows deco -->
+     <div class="absolute" style="top:45%;right:12%;transform:rotate(15deg);opacity:0.3;">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="#FFD600" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+     </div><!-- Lightning bolt deco -->
+     <svg class="absolute opacity-25" style="top:15%;left:35%;width:28px;transform:rotate(10deg);" viewBox="0 0 24 24" fill="#FF8C00">
+      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+     </svg><!-- Title area with torn paper -->
+     <div class="torn-edge paper-shadow mx-auto mt-6 mb-4 px-6 py-5 text-center" style="background:#fff; max-width:420px; transform:rotate(-1.5deg);">
+      <h1 data-template-id="home-title" class="canva-text font-display" style="font-size: 32px; line-height: 1.05; color: rgb(0, 212, 170); font-weight: 900; letter-spacing: -0.02em; font-style: normal;">ATENÇÃO &amp; DESIGN</h1>
+     </div><!-- Subtitle on magenta strip -->
+     <div class="paper-shadow mx-auto mb-6 px-5 py-2 text-center" style="background:var(--magenta); max-width:340px; transform:rotate(1deg); border-radius:2px;">
+      <p data-template-id="home-subtitle" class="canva-text" style="color: rgb(255, 255, 255); font-weight: 700; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; font-style: normal;">COMO AS CORES AFETAM SUA ATENÇÃO?</p>
+     </div><!-- Geometric confetti -->
+     <div class="absolute w-4 h-4 rounded-full" style="background:var(--yellow);top:38%;left:18%;opacity:0.6;"></div>
+     <div class="absolute w-3 h-3" style="background:var(--cyan);top:50%;left:75%;transform:rotate(45deg);opacity:0.5;"></div>
+     <div class="absolute w-5 h-2 rounded" style="background:var(--red);top:72%;left:22%;transform:rotate(-20deg);opacity:0.35;"></div><!-- Yellow callout -->
+     <div class="paper-shadow mx-auto mb-8 px-4 py-2 text-center" style="background:var(--yellow); max-width:320px; transform:rotate(0.8deg); border-radius:3px;">
+      <p data-template-id="home-callout" class="canva-text" style="color: rgb(26, 10, 46); font-weight: 700; font-size: 13px; font-style: normal;">Clique em um dos ícones para uma experiência única!</p>
+     </div><!-- Nav cards grid -->
+     <div class="grid grid-cols-2 gap-4 max-w-sm mx-auto pb-10">
+      <button type="button" onclick="navigate('atencao')" data-template-id="nav-atencao" class="canva-button nav-card torn-edge paper-shadow flex flex-col items-center gap-2 p-5" style="background:#fff; transform:rotate(-2deg); border:none;">
+       <svg width="36" height="36" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="18" stroke="#7B2D8E" stroke-width="3"></circle><circle cx="24" cy="24" r="8" stroke="#7B2D8E" stroke-width="2.5"></circle><circle cx="24" cy="24" r="2.5" fill="#7B2D8E"></circle><path d="M24 2v6M24 40v6M2 24h6M40 24h6" stroke="#7B2D8E" stroke-width="2" stroke-linecap="round"></path>
+       </svg><span style="font-weight:900;color:#7B2D8E;font-size:0.9rem;letter-spacing:0.04em;">ATENÇÃO</span> </button> <button type="button" onclick="navigate('cores')" data-template-id="nav-cores" class="canva-button nav-card torn-edge paper-shadow flex flex-col items-center gap-2 p-5" style="background:#fff; transform:rotate(1.5deg); border:none;">
+       <svg width="36" height="36" viewBox="0 0 48 48" fill="none"><circle cx="20" cy="20" r="12" fill="#E91E8C" opacity="0.5"></circle><circle cx="28" cy="20" r="12" fill="#00D4AA" opacity="0.5"></circle><circle cx="24" cy="28" r="12" fill="#FFD600" opacity="0.5"></circle>
+       </svg><span style="font-weight:900;color:#E91E8C;font-size:0.9rem;letter-spacing:0.04em;">CORES</span> </button> <button type="button" onclick="navigate('experimento-coleta')" data-template-id="nav-experimento" class="canva-button nav-card torn-edge paper-shadow flex flex-col items-center gap-2 p-5" style="background:#fff; transform:rotate(1deg); border:none;">
+       <svg width="36" height="36" viewBox="0 0 48 48" fill="none"><rect x="10" y="6" width="28" height="36" rx="3" stroke="#00D4AA" stroke-width="2.5" fill="none"></rect><path d="M18 16h12M18 22h12M18 28h8" stroke="#00D4AA" stroke-width="2" stroke-linecap="round"></path><path d="M34 30l6 6" stroke="#00D4AA" stroke-width="2.5" stroke-linecap="round"></path><circle cx="34" cy="30" r="6" stroke="#00D4AA" stroke-width="2" fill="none"></circle>
+       </svg><span style="font-weight:900;color:#00D4AA;font-size:0.9rem;letter-spacing:0.04em;">EXPERIMENTO</span> </button> <button type="button" onclick="navigate('pesquisa')" data-template-id="nav-pesquisa" class="canva-button nav-card torn-edge paper-shadow flex flex-col items-center gap-2 p-5" style="background:#fff; transform:rotate(-1.5deg); border:none;">
+       <svg width="36" height="36" viewBox="0 0 48 48" fill="none"><rect x="8" y="4" width="32" height="40" rx="3" stroke="#FFD600" stroke-width="2.5" fill="none"></rect><path d="M16 14h16M16 20h16M16 26h10" stroke="#FFD600" stroke-width="2" stroke-linecap="round"></path>
+       </svg><span style="font-weight:900;color:#FFD600;font-size:0.9rem;letter-spacing:0.04em;">PESQUISA</span> </button>
+     </div>
+    </div>
+   </div>
+  </div><!-- ==================== ATENÇÃO ==================== -->
+  <div id="screen-atencao" class="screen w-full">
+   <div class="noise-bg w-full" style="min-height:calc(100 * min(var(--vh,1vh),1vh)); background:linear-gradient(160deg,#1a0a2e,#2d1450);">
+    <div class="max-w-2xl mx-auto px-4 py-8" style="position:relative;z-index:1;">
+     <button type="button" onclick="navigate('home')" data-template-id="back-button" class="canva-button mb-6 px-4 py-2 rounded-sm font-bold text-sm" style="background: rgb(0, 212, 170); color: rgb(26, 10, 46); border-width: medium; border-style: none; border-color: currentcolor; border-image: none; cursor: pointer; font-weight: 700; font-style: normal; font-size: 14px;">← Voltar</button>
+     <div class="info-card p-6 mb-4">
+      <h2 data-template-id="info-atencao-title" class="canva-text font-display mb-3" style="color: rgb(123, 45, 142); font-weight: 900; font-style: normal; font-size: 24px;">Atenção Seletiva</h2>
+      <div data-template-id="info-atencao-text" class="canva-text" style="color: rgb(51, 51, 51); line-height: 1.7; font-size: 15px; font-weight: 400; font-style: normal;">Atenção seletiva é a capacidade do nosso cérebro de focar em um estímulo específico enquanto ignora outros ao redor. Imagine que você está em uma sala barulhenta, mas consegue ouvir a conversa de um amigo — isso é atenção seletiva em ação! No mundo digital, cores, formas e contrastes competem pela sua atenção a todo momento. Pesquisadores estudam como diferentes características visuais facilitam ou dificultam essa seleção, especialmente em adolescentes cujo sistema de atenção ainda está em desenvolvimento.</div>
+     </div>
+    </div>
+   </div>
+  </div><!-- ==================== CORES ==================== -->
+  <div id="screen-cores" class="screen w-full">
+   <div class="noise-bg w-full" style="min-height:calc(100 * min(var(--vh,1vh),1vh)); background:linear-gradient(160deg,#1a0a2e,#2d1450);">
+    <div class="max-w-2xl mx-auto px-4 py-8" style="position:relative;z-index:1;">
+     <button type="button" onclick="navigate('home')" class="mb-6 px-4 py-2 rounded-sm font-bold text-sm" style="background:var(--cyan);color:#1a0a2e;border:none;cursor:pointer;">← Voltar</button>
+     <div class="info-card p-6 mb-4">
+      <h2 data-template-id="info-cores-title" class="canva-text font-display mb-3" style="color: rgb(233, 30, 140); font-weight: 900; font-style: normal; font-size: 24px;">Propriedades das Cores</h2>
+      <div data-template-id="info-cores-text" class="canva-text" style="color: rgb(51, 51, 51); line-height: 1.7; font-size: 15px; font-weight: 400; font-style: normal;">As cores possuem quatro propriedades principais que estudaremos neste experimento:
+
+🎨 Matiz — é a "cor" em si: vermelho, azul, verde, amarelo...
+
+💧 Saturação — é a intensidade ou pureza da cor. Uma cor muito saturada é vibrante; com pouca saturação, ela parece desbotada ou acinzentada.
+
+☀️ Luminosidade — é o quanto a cor é clara ou escura. Um azul claro tem alta luminosidade; um azul marinho, baixa.
+
+⚡ Contraste — é a diferença visual entre um elemento e o que está ao seu redor. Alto contraste facilita a percepção; baixo contraste dificulta.</div>
+     </div>
+    </div>
+   </div>
+  </div><!-- ==================== PESQUISA ==================== -->
+  <div id="screen-pesquisa" class="screen w-full">
+   <div class="noise-bg w-full" style="min-height:calc(100 * min(var(--vh,1vh),1vh)); background:linear-gradient(160deg,#1a0a2e,#2d1450);">
+    <div class="max-w-2xl mx-auto px-4 py-8" style="position:relative;z-index:1;">
+     <button type="button" onclick="navigate('home')" class="mb-6 px-4 py-2 rounded-sm font-bold text-sm" style="background:var(--cyan);color:#1a0a2e;border:none;cursor:pointer;">← Voltar</button>
+     <div class="info-card p-6 mb-4">
+      <h2 data-template-id="info-pesquisa-title" class="canva-text font-display mb-3" style="color: rgb(255, 214, 0); font-weight: 900; font-style: normal; font-size: 24px;">Sobre a Pesquisa</h2>
+      <div data-template-id="info-pesquisa-text" class="canva-text" style="color: rgb(51, 51, 51); line-height: 1.7; font-size: 15px; font-weight: 400; font-style: normal;">Objetivo: Investigar como diferentes características cromáticas (matiz, saturação, luminosidade e contraste) de interfaces digitais influenciam a atenção seletiva de adolescentes de 12 a 17 anos.
+
+Metodologia: Cada participante realiza um breve treinamento seguido de 60 tentativas experimentais, distribuídas em 4 fases. Em cada tentativa, o participante deve encontrar o mais rápido possível um elemento-alvo que difere dos demais apenas na característica estudada. O tempo de resposta e a precisão são registrados anonimamente. Nenhum dado pessoal identificável é coletado. A análise comparará o desempenho entre as diferentes condições de cada fase.</div>
+     </div>
+    </div>
+   </div>
+  </div><!-- ==================== EXPERIMENTO: COLETA ==================== -->
+  <div id="screen-experimento-coleta" class="screen w-full">
+   <div class="w-full flex items-center justify-center px-4" style="min-height:calc(100 * min(var(--vh,1vh),1vh)); background:#f7f7f5;">
+    <div class="w-full max-w-md">
+     <button type="button" onclick="navigate('home')" class="mb-4 px-3 py-1 rounded text-sm font-bold" style="background:#eee;color:#555;border:none;cursor:pointer;">← Voltar</button>
+     <div class="bg-white rounded-xl p-6 shadow-md">
+      <h2 data-template-id="coleta-title" class="canva-text font-display mb-5 text-center" style="color: rgb(26, 10, 46); font-weight: 900; font-style: normal; font-size: 24px;">Antes de começar...</h2>
+      <form id="coleta-form" class="space-y-4" onsubmit="return false;">
+       <div>
+        <label for="campo-idade" class="block text-sm font-bold mb-1" style="color:#555;">Idade</label> <input id="campo-idade" type="number" min="12" max="17" required="" class="w-full border rounded-lg px-3 py-2 text-sm" style="border-color:#ccc;" placeholder="12 a 17 anos">
+       </div>
+       <div>
+        <label for="campo-dispositivo" class="block text-sm font-bold mb-1" style="color:#555;">Dispositivo mais utilizado</label> <select id="campo-dispositivo" required="" class="w-full border rounded-lg px-3 py-2 text-sm" style="border-color:#ccc;"> <option value="">Selecione...</option> <option value="celular">Celular</option> <option value="tablet">Tablet</option> <option value="notebook">Notebook</option> <option value="computador">Computador</option> <option value="outro">Outro</option> </select>
+       </div>
+       <div>
+        <label for="campo-tela" class="block text-sm font-bold mb-1" style="color:#555;">Tempo médio diário de tela</label> <select id="campo-tela" required="" class="w-full border rounded-lg px-3 py-2 text-sm" style="border-color:#ccc;"> <option value="">Selecione...</option> <option value="&lt;1h">&lt;1h</option> <option value="1-2h">1–2h</option> <option value="2-4h">2–4h</option> <option value="4-6h">4–6h</option> <option value="&gt;6h">&gt;6h</option> </select>
+       </div>
+       <div id="coleta-erro" class="text-red-600 text-sm font-bold hidden"></div><button data-template-id="coleta-button" type="button" onclick="submitColeta()" class="canva-button w-full py-3 rounded-lg font-bold text-sm" style="background: rgb(0, 212, 170); color: rgb(26, 10, 46); border-width: medium; border-style: none; border-color: currentcolor; border-image: none; cursor: pointer; font-weight: 700; font-style: normal; font-size: 16px;">Continuar</button>
+      </form>
+     </div>
+    </div>
+   </div>
+  </div><!-- ==================== TUTORIAL ==================== -->
+  <div id="screen-tutorial" class="screen w-full">
+   <div class="w-full flex items-center justify-center px-4" style="min-height:calc(100 * min(var(--vh,1vh),1vh)); background:#f7f7f5;">
+    <div class="w-full max-w-md bg-white rounded-xl p-8 shadow-md text-center">
+     <p data-template-id="tutorial-text" class="canva-text mb-2" style="color: rgb(51, 51, 51); line-height: 1.7; font-size: 15px; font-weight: 400; font-style: normal;">Em cada tentativa, você verá vários elementos semelhantes. Encontre o elemento diferente e clique nele o mais rápido possível.</p>
+     <p class="text-xs mb-6" style="color:#999;">Um ID anônimo foi criado para esta sessão.</p><button data-template-id="tutorial-button" type="button" onclick="startTraining()" class="canva-button px-8 py-3 rounded-lg font-bold text-sm" style="background: rgb(123, 45, 142); color: rgb(255, 255, 255); border-width: medium; border-style: none; border-color: currentcolor; border-image: none; cursor: pointer; font-weight: 700; font-style: normal; font-size: 16px;">Iniciar treinamento</button>
+    </div>
+   </div>
+  </div><!-- ==================== TRAINING / TRIAL ==================== -->
+  <div id="screen-trial" class="screen w-full">
+   <div class="w-full flex flex-col items-center justify-center px-4" style="min-height:calc(100 * min(var(--vh,1vh),1vh)); background:#f2f2f0;">
+    <p id="trial-progress" class="text-xs mb-2" style="color:#aaa;"></p>
+    <p id="trial-save-status" class="text-xs mb-3" style="color:#777;min-height:1.25rem;" aria-live="polite"></p>
+    <div id="trial-grid" class="trial-grid" style="grid-template-columns:repeat(4,1fr); max-width:340px; width:100%;"></div>
+   </div>
+  </div><!-- ==================== FASE INTRO ==================== -->
+  <div id="screen-fase-intro" class="screen w-full">
+   <div class="w-full flex items-center justify-center px-4" style="min-height:calc(100 * min(var(--vh,1vh),1vh)); background:#f7f7f5;">
+    <div class="w-full max-w-md bg-white rounded-xl p-8 shadow-md text-center">
+     <h2 data-template-id="fase-intro-title" id="fase-intro-title-el" class="canva-text font-display mb-3" style="color:#1a0a2e;font-weight:900;"></h2>
+     <p data-template-id="fase-intro-text" id="fase-intro-text-el" class="canva-text mb-6" style="color: rgb(85, 85, 85); line-height: 1.6; font-size: 14px;"></p><button data-template-id="fase-intro-button" type="button" onclick="startPhase()" class="canva-button px-8 py-3 rounded-lg font-bold text-sm" style="background: rgb(123, 45, 142); color: rgb(255, 255, 255); border-width: medium; border-style: none; border-color: currentcolor; border-image: none; cursor: pointer; font-weight: 700; font-style: normal; font-size: 16px;">Iniciar fase</button>
+    </div>
+   </div>
+  </div><!-- ==================== FIM ==================== -->
+  <div id="screen-fim" class="screen w-full">
+   <div class="w-full flex items-center justify-center px-4" style="min-height:calc(100 * min(var(--vh,1vh),1vh)); background:#f7f7f5;">
+    <div class="w-full max-w-md bg-white rounded-xl p-8 shadow-md text-center">
+     <h2 data-template-id="fim-title" class="canva-text font-display mb-3" style="color: rgb(26, 10, 46); font-weight: 900; font-style: normal; font-size: 24px;">Experimento concluído!</h2>
+     <p data-template-id="fim-text" class="canva-text mb-6" style="color: rgb(85, 85, 85); line-height: 1.6; font-weight: 400; font-style: normal; font-size: 16px;">Experimento concluído. Seus resultados estão sendo enviados. Obrigado pela participação!</p>
+     <p id="save-status" class="text-sm mb-4" style="color:#555;" aria-live="polite"></p><button id="retry-save-button" type="button" onclick="retrySaveResults()" class="hidden px-6 py-2 rounded-lg text-sm font-semibold mb-3" style="background:#ff3b30;color:#fff;border:none;cursor:pointer;">Tentar novamente</button> <button data-template-id="fim-home-button" type="button" onclick="navigate('home')" class="canva-button px-6 py-2 rounded-lg text-sm" style="background: rgb(238, 238, 238); color: rgb(85, 85, 85); border-width: medium; border-style: none; border-color: currentcolor; border-image: none; cursor: pointer; font-weight: 600; font-style: normal; font-size: 16px;">Voltar à home</button>
+    </div>
+   </div>
+  </div>
+  <script>
+// ====== NAVIGATION ======
+function navigate(screen) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  const el = document.getElementById('screen-' + screen);
+  if (el) el.classList.add('active');
+}
+
+// ====== SESSION STATE ======
+let sessionData = null;
+let anonId = '';
+let pendingResults = []; // Todas as tentativas ficam aqui até o final do experimento.
+let resultsSent = false;
+let resultsSending = false;
+
+function generateId() {
+  if (typeof crypto !== 'undefined' && crypto.randomUUID) return crypto.randomUUID().slice(0, 8);
+  return 'P' + Math.random().toString(36).slice(2, 10);
+}
+
+// ====== ENVIO DOS RESULTADOS ======
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxbhqI0tss2Dv9bpTx372qpnfjEaH2nQKNiE6kOLzc6SxGcGwD5XADJcEh3NAEd4YM/exec';
+
+function addTrialToMemory(trialData) {
+  pendingResults.push({
+    id_anonimo: String(trialData.id_anonimo),
+    idade: Number(trialData.idade),
+    dispositivo: String(trialData.dispositivo),
+    tempo_de_tela: String(trialData.tempo_de_tela),
+    tipo_de_tentativa: String(trialData.tipo_de_tentativa),
+    fase: trialData.fase === '' ? '' : Number(trialData.fase),
+    condicao: String(trialData.condicao),
+    tentativa: Number(trialData.tentativa),
+    acerto: Boolean(trialData.acerto),
+    tempo_ms: Number(trialData.tempo_ms)
+  });
+}
+
+async function sendAllResults() {
+  if (resultsSent || resultsSending) return true;
+  resultsSending = true;
+
+  try {
+    const payload = {
+      id_anonimo: anonId,
+      idade: sessionData.idade,
+      dispositivo: sessionData.dispositivo,
+      tempo_de_tela: sessionData.tela,
+      tentativas: pendingResults
+    };
+
+    const response = await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {
+        'Content-Type': 'text/plain;charset=utf-8'
+      },
+      body: JSON.stringify(payload)
+    });
+
+    // no-cors impede ler a resposta do Apps Script.
+    // Se o fetch não rejeitar, consideramos o envio concluído no navegador.
+    resultsSent = true;
+    return true;
+  } catch (error) {
+    console.error('[sendAllResults] falha no envio:', error);
+    return false;
+  } finally {
+    resultsSending = false;
+  }
+}
+
+async function retrySaveResults() {
+  const status = document.getElementById('save-status');
+  const retry = document.getElementById('retry-save-button');
+
+  if (status) status.textContent = 'Enviando os resultados...';
+  if (retry) retry.classList.add('hidden');
+
+  const ok = await sendAllResults();
+
+  if (ok) {
+    if (status) {
+      status.textContent = 'Resultados enviados com sucesso.';
+      status.style.color = '#2e7d32';
+    }
+  } else {
+    if (status) {
+      status.textContent = 'Não foi possível enviar os resultados. Verifique a conexão e tente novamente.';
+      status.style.color = '#c62828';
+    }
+    if (retry) retry.classList.remove('hidden');
+  }
+}
+
+// ====== COLETA ======
+function submitColeta() {
+  const idade = parseInt(document.getElementById('campo-idade').value);
+  const dispositivo = document.getElementById('campo-dispositivo').value;
+  const tela = document.getElementById('campo-tela').value;
+  const erro = document.getElementById('coleta-erro');
+
+  if (!idade || idade < 12 || idade > 17) { erro.textContent = 'Idade deve ser entre 12 e 17.'; erro.classList.remove('hidden'); return; }
+  if (!dispositivo) { erro.textContent = 'Selecione o dispositivo.'; erro.classList.remove('hidden'); return; }
+  if (!tela) { erro.textContent = 'Selecione o tempo de tela.'; erro.classList.remove('hidden'); return; }
+
+  erro.classList.add('hidden');
+  anonId = generateId();
+  sessionData = { idade, dispositivo, tela };
+  navigate('tutorial');
+}
+
+// ====== EXPERIMENT ENGINE ======
+const GRID_SIZE = 16; // 4x4
+const GRID_COLS = 4;
+const CELL_SIZE = 70;
+
+const PHASES = [
+  {
+    name: 'MATIZ', key: 'matiz',
+    desc: 'Nesta fase, o alvo se diferencia dos outros elementos pela cor (matiz). Saturação e luminosidade são mantidas equivalentes.',
+    conditions: ['vermelho', 'azul', 'verde'],
+    getColors: (cond) => {
+      // Matched L~55, S~70 in HSL
+      const base = 'hsl(60, 0%, 65%)'; // neutral gray distractors
+      const targets = { vermelho: 'hsl(0, 70%, 55%)', azul: 'hsl(220, 70%, 55%)', verde: 'hsl(130, 70%, 55%)' };
+      return { distractor: base, target: targets[cond] };
+    }
+  },
+  {
+    name: 'SATURAÇÃO', key: 'saturacao',
+    desc: 'Nesta fase, o alvo se diferencia pela saturação. Matiz e luminosidade são mantidos constantes.',
+    conditions: ['baixa', 'média', 'alta'],
+    getColors: (cond) => {
+      const distractor = 'hsl(220, 40%, 55%)';
+      const sats = { 'baixa': 'hsl(220, 15%, 55%)', 'média': 'hsl(220, 60%, 55%)', 'alta': 'hsl(220, 90%, 55%)' };
+      return { distractor, target: sats[cond] };
+    }
+  },
+  {
+    name: 'LUMINOSIDADE', key: 'luminosidade',
+    desc: 'Nesta fase, o alvo se diferencia pela luminosidade. Matiz e saturação são mantidos constantes.',
+    conditions: ['baixa', 'média', 'alta'],
+    getColors: (cond) => {
+      const distractor = 'hsl(220, 50%, 55%)';
+      const lums = { 'baixa': 'hsl(220, 50%, 30%)', 'média': 'hsl(220, 50%, 70%)', 'alta': 'hsl(220, 50%, 85%)' };
+      return { distractor, target: lums[cond] };
+    }
+  },
+  {
+    name: 'CONTRASTE', key: 'contraste',
+    desc: 'Nesta fase, o alvo se diferencia pelo contraste com o fundo. Outras propriedades são mantidas constantes.',
+    conditions: ['baixo', 'médio', 'alto'],
+    getColors: (cond) => {
+      // Background is #f2f2f0 ≈ L92. All target levels remain visibly distinct from the distractors and background.
+      const distractor = 'hsl(220, 50%, 50%)';
+      const targets = { 'baixo': 'hsl(220, 50%, 68%)', 'médio': 'hsl(220, 50%, 35%)', 'alto': 'hsl(220, 50%, 18%)' };
+      return { distractor, target: targets[cond] };
+    }
+  }
+];
+
+// Pre-generate target positions per phase to avoid bias
+// Each phase: 15 trials, positions 0..15, balanced across 3 conditions (5 each)
+function generatePositions(seed) {
+  const rng = mulberry32(seed);
+  const positions = [];
+  for (let p = 0; p < 4; p++) {
+    const phasePos = [];
+    const pool = [];
+    for (let i = 0; i < 3; i++) { // 3 conditions
+      const condPos = [];
+      const available = Array.from({length: GRID_SIZE}, (_, j) => j);
+      for (let t = 0; t < 5; t++) {
+        const idx = Math.floor(rng() * available.length);
+        condPos.push(available.splice(idx, 1)[0]);
+      }
+      pool.push(condPos);
+    }
+    phasePos.push(...pool);
+    positions.push(phasePos);
+  }
+  return positions;
+}
+
+function mulberry32(a) {
+  return function() {
+    a |= 0; a = a + 0x6D2B79F5 | 0;
+    var t = Math.imul(a ^ a >>> 15, 1 | a);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  }
+}
+
+let expState = {
+  isTraining: false,
+  phaseIdx: -1,
+  trialQueue: [],
+  trialIdx: 0,
+  clickHandled: false,
+  startTime: 0,
+  positions: null,
+  seed: 0
+};
+
+function buildTrialQueue(phaseIdx) {
+  const phase = PHASES[phaseIdx];
+  const queue = [];
+  const posData = expState.positions[phaseIdx];
+  for (let c = 0; c < 3; c++) {
+    for (let t = 0; t < 5; t++) {
+      queue.push({
+        condition: phase.conditions[c],
+        targetPos: posData[c][t],
+        trialInCond: t + 1
+      });
+    }
+  }
+  // Shuffle with seeded RNG for deterministic but balanced order
+  const rng = mulberry32(expState.seed + phaseIdx * 100);
+  for (let i = queue.length - 1; i > 0; i--) {
+    const j = Math.floor(rng() * (i + 1));
+    [queue[i], queue[j]] = [queue[j], queue[i]];
+  }
+  return queue;
+}
+
+function buildTrainingQueue() {
+  const queue = [];
+  const rng = mulberry32(expState.seed + 999);
+  for (let t = 0; t < 5; t++) {
+    queue.push({
+      condition: 'treinamento',
+      targetPos: Math.floor(rng() * GRID_SIZE),
+      trialInCond: t + 1
+    });
+  }
+  return queue;
+}
+
+function startTraining() {
+  expState.seed = Date.now();
+  expState.positions = generatePositions(expState.seed);
+  expState.isTraining = true;
+  expState.trialQueue = buildTrainingQueue();
+  expState.trialIdx = 0;
+  navigate('trial');
+  renderTrial();
+}
+
+function showPhaseIntro(phaseIdx) {
+  expState.phaseIdx = phaseIdx;
+  const phase = PHASES[phaseIdx];
+  document.getElementById('fase-intro-title-el').textContent = 'Fase ' + (phaseIdx + 1) + ': ' + phase.name;
+  document.getElementById('fase-intro-text-el').textContent = phase.desc;
+  navigate('fase-intro');
+}
+
+function startPhase() {
+  expState.isTraining = false;
+  expState.trialQueue = buildTrialQueue(expState.phaseIdx);
+  expState.trialIdx = 0;
+  navigate('trial');
+  renderTrial();
+}
+
+function renderTrial() {
+  const grid = document.getElementById('trial-grid');
+  const progress = document.getElementById('trial-progress');
+  const trial = expState.trialQueue[expState.trialIdx];
+
+  if (expState.isTraining) {
+    progress.textContent = 'Treinamento ' + (expState.trialIdx + 1) + ' de 5';
+  } else {
+    const globalIdx = expState.trialIdx + 1;
+    progress.textContent = 'Fase ' + (expState.phaseIdx + 1) + ' — ' + globalIdx + '/15';
+  }
+
+  let dColor, tColor;
+  if (expState.isTraining) {
+    dColor = 'hsl(0, 0%, 65%)';
+    tColor = 'hsl(0, 70%, 50%)';
+  } else {
+    const phase = PHASES[expState.phaseIdx];
+    const colors = phase.getColors(trial.condition);
+    dColor = colors.distractor;
+    tColor = colors.target;
+  }
+
+  grid.innerHTML = '';
+  expState.clickHandled = false;
+
+  for (let i = 0; i < GRID_SIZE; i++) {
+    const cell = document.createElement('div');
+    cell.className = 'trial-cell';
+    cell.style.width = CELL_SIZE + 'px';
+    cell.style.height = CELL_SIZE + 'px';
+    cell.style.backgroundColor = (i === trial.targetPos) ? tColor : dColor;
+    cell.setAttribute('role', 'button');
+    cell.setAttribute('aria-label', 'Elemento ' + (i + 1));
+    const idx = i;
+    cell.addEventListener('click', () => handleTrialClick(idx));
+    grid.appendChild(cell);
+  }
+
+  expState.startTime = performance.now();
+}
+
+function persistCurrentTrial(trialData) {
+  addTrialToMemory(trialData);
+  return true;
+}
+
+function advanceAfterTrial() {
+  expState.trialIdx++;
+  if (expState.trialIdx < expState.trialQueue.length) {
+    renderTrial();
+  } else if (expState.isTraining) {
+    showPhaseIntro(0);
+  } else {
+    const nextPhase = expState.phaseIdx + 1;
+    if (nextPhase < PHASES.length) {
+      showPhaseIntro(nextPhase);
+    } else {
+      navigate('fim');
+      updateFinalSaveScreen();
+      sendAllResults().then(() => updateFinalSaveScreen());
+    }
+  }
+}
+
+function updateFinalSaveScreen() {
+  const status = document.getElementById('save-status');
+  const retry = document.getElementById('retry-save-button');
+  if (!status) return;
+
+  if (resultsSent) {
+    status.textContent = 'Resultados enviados com sucesso.';
+    status.style.color = '#2e7d32';
+    if (retry) retry.classList.add('hidden');
+  } else if (resultsSending) {
+    status.textContent = 'Enviando os resultados...';
+    status.style.color = '#555';
+    if (retry) retry.classList.add('hidden');
+  } else {
+    status.textContent = 'Preparando o envio de ' + pendingResults.length + ' tentativas...';
+    status.style.color = '#555';
+    if (retry) retry.classList.add('hidden');
+  }
+}
+
+function handleTrialClick(clickedIdx) {
+  if (expState.clickHandled) return;
+
+  expState.clickHandled = true;
+  const rt = Math.round(performance.now() - expState.startTime);
+  const trial = expState.trialQueue[expState.trialIdx];
+
+  const trialData = {
+    id_anonimo: anonId,
+    idade: sessionData.idade,
+    dispositivo: sessionData.dispositivo,
+    tempo_de_tela: sessionData.tela,
+    tipo_de_tentativa: expState.isTraining ? 'tutorial' : 'experimental',
+    fase: expState.isTraining ? '' : expState.phaseIdx + 1,
+    condicao: trial.condition,
+    tentativa: trial.trialInCond,
+    acerto: clickedIdx === trial.targetPos,
+    tempo_ms: rt
+  };
+
+  // O resultado é salvo apenas na memória. Nenhuma requisição é feita aqui.
+  persistCurrentTrial(trialData);
+  advanceAfterTrial();
+}
+
+// Init icons
+document.addEventListener('DOMContentLoaded', () => { lucide.createIcons(); });
+</script>
+ 
+</body></html>
